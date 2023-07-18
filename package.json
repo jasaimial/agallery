@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "server1": "node server.js",
+    "server2": "npx ts-node ./server.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
