@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="my-app">
+      <div>
+        {{ todo | oneLine }}
+      </div>
+      <div>
+        count: {{ itemsCount }}
+      </div>
+      <input type="text" v-model="todoItem">
+      <button @click="addTodoItem">Add</button>
+    </div>
+
+    <script>
+      new Vue(
+        {
+          el: '#my-app', 
+          data: {
+            todoItem: '',
+            todo: ['strength training', '21K run']
+          }, 
+          methods: {
+            addTodoItem() {
+              if (this.todoItem.trim() === '') {
+                alert('Cannot add empty item');
+                return;
+              }
+
+              this.todo.push(this.todoItem);
+              this.todoItem = ''
+            }
+          }, 
+          computed: {
+            itemsCount() {
+              return this.todo?.length;
+            }
+          },
+          watch: {
+            todo(newValue, oldValue) {
+              console.log('"todo" changed from [' + oldValue + '] to [' + newValue + ']');
+            }
+          }, 
+          filters: {
+            oneLine(value) {
+              return value.join(' | ');
+            }
+          }
+        }
+      )
+
+      // Register a vue component 
+      Vue.component('todo-item', {
+        data() {
+          return {
+            todoItem: ''
+          }
+        }
+      });
+    </script>
+
+  </body>
+</html>

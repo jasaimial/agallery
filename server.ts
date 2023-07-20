@@ -1,5 +1,6 @@
 import * as http from 'http';
 import  { Router } from './router';
+import * as fs from 'fs';
 
 const router = new Router();
 router.get('/', (request, response) => {
@@ -17,6 +18,12 @@ router.get('/about', (request, response) => {
 router.get('/item/:id', (request, response, params) => {
     response.statusCode = 200;
     response.end(JSON.stringify(params, null, 4));
+});
+
+router.get('/todo', (request, response, params) => {
+    fs.readFile('./vue_exp_todo/todo.html', function(err, data) {
+      response.end(data);
+    });
 });
 
 const server = http.createServer((request, response) => {
